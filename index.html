@@ -2,14 +2,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Biz ❤️</title>
+<title>Samet ❤️ Lorin</title>
 
 <style>
 body{
 margin:0;
 padding:0;
-background:url("askim.jpg") no-repeat center center/cover;
-font-family:Arial;
+height:100vh;
+background:url("askim.jpg") no-repeat center center;
+background-size:cover;
+font-family:Arial, sans-serif;
 color:white;
 text-align:center;
 overflow:hidden;
@@ -24,24 +26,69 @@ background:rgba(0,0,0,0.55);
 
 .content{
 position:relative;
-top:25%;
+top:18%;
 z-index:2;
+padding:20px;
 }
 
 h1{
 font-size:38px;
+margin-bottom:10px;
+}
+
+.names{
+font-size:28px;
+margin-bottom:20px;
+font-weight:bold;
 }
 
 #gun{
-font-size:22px;
+font-size:20px;
+margin-bottom:20px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+}
+
+#mesaj{
 margin-top:20px;
+font-size:20px;
+display:none;
+animation:fadeIn 2s ease forwards;
+}
+
+.infinity{
+position:absolute;
+bottom:30px;
+width:100%;
+font-size:28px;
+opacity:0;
+animation:sonsuz 4s ease-in-out infinite;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+@keyframes sonsuz{
+0%{opacity:0; transform:scale(0.8);}
+50%{opacity:1; transform:scale(1.1);}
+100%{opacity:0; transform:scale(0.8);}
 }
 
 .heart{
 position:fixed;
 top:-10px;
 color:#ff4d6d;
-font-size:20px;
+font-size:18px;
 animation:fall linear forwards;
 }
 
@@ -56,13 +103,28 @@ to{ transform:translateY(100vh); }
 <div class="overlay"></div>
 
 <div class="content">
-<h1>İyi ki Varsın ❤️</h1>
-<div id="gun"></div>
+<h1>Bizim Hikâyemiz ❤️</h1>
+
+<div class="names">
+Samet ❤️ Lorin
 </div>
+
+<div id="gun"></div>
+
+<button onclick="goster()">Bir Sürpriz Var 💌</button>
+
+<div id="mesaj">
+10.10.2025'ten beri hayatım daha güzel.  
+Lorin, sen benim en değerli şansımsın.  
+Sonsuza kadar yan yana yürüyelim ♾️💖
+</div>
+
+</div>
+
+<div class="infinity">♾️ Sonsuza Kadar ♾️</div>
 
 <script>
 
-// BURAYA İLİŞKİ BAŞLANGIÇ TARİHİ
 let baslangic = new Date("2025-10-10");
 
 let bugun = new Date();
@@ -70,9 +132,12 @@ let fark = bugun - baslangic;
 let gun = Math.floor(fark/(1000*60*60*24));
 
 document.getElementById("gun").innerHTML =
-gun + " gündür birlikteyiz 💖";
+gun + " gündür birlikteyiz 💞";
 
-// kalp yağmuru
+function goster(){
+document.getElementById("mesaj").style.display="block";
+}
+
 function kalp(){
 let h=document.createElement("div");
 h.innerHTML="❤";
