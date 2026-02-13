@@ -1,99 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Samet ❤️ Lorin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorin ❤️ Samet</title>
 
 <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 body{
-margin:0;
-padding:0;
-height:100vh;
-background:url("askim.jpg") no-repeat center center;
-background-size:cover;
-font-family:Arial, sans-serif;
-color:white;
-text-align:center;
-overflow:hidden;
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+  color:white;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:url("askim.jpg") no-repeat center center/cover;
 }
 
 .overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.55);
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.5);
 }
 
 .content{
-position:relative;
-top:18%;
-z-index:2;
-padding:20px;
+  position:relative;
+  z-index:2;
 }
 
 h1{
-font-size:38px;
-margin-bottom:10px;
+  font-size:40px;
+  margin-bottom:10px;
 }
 
-.names{
-font-size:28px;
-margin-bottom:20px;
-font-weight:bold;
+#days{
+  font-size:22px;
+  margin-bottom:20px;
 }
 
-#gun{
-font-size:20px;
-margin-bottom:20px;
+.forever{
+  font-size:28px;
+  animation:pulse 2s ease-in-out infinite;
+  display:inline-block;
+}
+
+@keyframes pulse{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.05); }
+  100%{ transform:scale(1); }
 }
 
 button{
-padding:12px 25px;
-border:none;
-border-radius:8px;
-font-size:16px;
-cursor:pointer;
-background:#ff4d6d;
-color:white;
+  margin-top:20px;
+  padding:10px 20px;
+  font-size:16px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
 }
 
-#mesaj{
-margin-top:20px;
-font-size:20px;
-display:none;
-animation:fadeIn 2s ease forwards;
+/* Fade-in mesaj */
+.hidden-message{
+  margin-top:20px;
+  font-size:18px;
+  opacity:0;
+  transform:translateY(10px);
+  transition:all 0.6s ease;
 }
 
-.infinity{
-position:absolute;
-bottom:30px;
-width:100%;
-font-size:28px;
-opacity:0;
-animation:sonsuz 4s ease-in-out infinite;
+.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-@keyframes sonsuz{
-0%{opacity:0; transform:scale(0.8);}
-50%{opacity:1; transform:scale(1.1);}
-100%{opacity:0; transform:scale(0.8);}
-}
-
-.heart{
-position:fixed;
-top:-10px;
-color:#ff4d6d;
-font-size:18px;
-animation:fall linear forwards;
+/* Kurdele efekti */
+.ribbon{
+  position:fixed;
+  top:-30px;
+  font-size:22px;
+  animation:fall linear forwards;
 }
 
 @keyframes fall{
-to{ transform:translateY(100vh); }
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
 }
 </style>
 </head>
@@ -103,54 +104,50 @@ to{ transform:translateY(100vh); }
 <div class="overlay"></div>
 
 <div class="content">
-<h1>Bizim Hikâyemiz ❤️</h1>
+  <h1>Samet ❤️ Lorin</h1>
+  <div id="days"></div>
+  <div class="forever">Sonsuza kadar 💞</div>
 
-<div class="names">
-Samet ❤️ Lorin
+  <button onclick="showMessage()">Tıkla</button>
+
+  <div id="message" class="hidden-message">
+    İlk sevgililer günümüz kutlu olsun sevgilim.
+    Seni çok ama çok seviyorum.
+    İyi ki varsın, iyi ki benimlesin lorişinim 💖
+  </div>
 </div>
-
-<div id="gun"></div>
-
-<button onclick="goster()">Bir Sürpriz Var 💌</button>
-
-<div id="mesaj">
-10.10.2025'ten beri hayatım daha güzel.  
-Lorin, sen benim en değerli şansımsın.  
-Sonsuza kadar yan yana yürüyelim ♾️💖
-</div>
-
-</div>
-
-<div class="infinity">♾️ Sonsuza Kadar ♾️</div>
 
 <script>
 
-let baslangic = new Date("2025-10-10");
+/* Gün Hesaplama */
+const startDate = new Date("2025-10-10");
+const today = new Date();
+const diffTime = today - startDate;
+const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-let bugun = new Date();
-let fark = bugun - baslangic;
-let gun = Math.floor(fark/(1000*60*60*24));
+document.getElementById("days").innerText =
+  diffDays + " gündür birlikteyiz 💞";
 
-document.getElementById("gun").innerHTML =
-gun + " gündür birlikteyiz 💞";
-
-function goster(){
-document.getElementById("mesaj").style.display="block";
+/* Fade-in Mesaj */
+function showMessage(){
+  document.getElementById("message").classList.toggle("show");
 }
 
-function kalp(){
-let h=document.createElement("div");
-h.innerHTML="❤";
-h.classList.add("heart");
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(Math.random()*3+2)+"s";
-document.body.appendChild(h);
-setTimeout(()=>{h.remove();},5000);
+/* Kurdele Yağmuru */
+function createRibbon(){
+  const ribbon = document.createElement("div");
+  ribbon.classList.add("ribbon");
+  ribbon.innerText = "🎀";
+  ribbon.style.left = Math.random()*100 + "vw";
+  ribbon.style.animationDuration = (4 + Math.random()*3) + "s";
+  document.body.appendChild(ribbon);
+
+  setTimeout(()=>{ ribbon.remove(); },7000);
 }
 
-setInterval(kalp,300);
+setInterval(createRibbon,350);
 
 </script>
 
 </body>
-</html>
+</html> 
